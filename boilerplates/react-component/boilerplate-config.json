@@ -1,0 +1,77 @@
+{
+  "name": "",
+  "scripts": {
+    "build:esm": "parcel build src/index.js --no-minify --no-source-maps --out-file index.js",
+    "build:umd": "parcel build src/index.js --global :libName --out-file index.umd.js",
+    "build": "npm run build:esm && npm run build:umd",
+    "doc": "jsdoc -c .jsdoc.json -d ./docs/${npm_package_version}/",
+    "doc:latest": "jsdoc -c .jsdoc.json -d ./docs/latest/",
+    "doc:open": "npm run doc && open docs/${npm_package_version}/index.html",
+    "lint": "eslint \"src/**\"",
+    "start": "parcel example/index.html --open --out-dir example/dist",
+    "test": "jest --config jest.config.json",
+    "test:watch": "npm run test -- --watchAll",
+    "test:open": "npm run test && open coverage/lcov-report/index.html",
+    "test:coveralls": "npm run test -- --coverageReporters=text-lcov | coveralls",
+    "preversion": "npm run lint && npm run test",
+    "version": "npm run build && npm run doc && npm run doc:latest",
+    "postversion": "git add docs/ && git commit -am \"Documentation ${npm_package_version}\" && git push --follow-tags",
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "main": "dist/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "15.*.*",
+    "react": "16.*.*",
+    "react-dom": "16.*.*",
+    "styled-components": "3.*.*"
+  },
+  "devDependencies": {
+    "@storybook/react": "3.*.*",
+    "babel-core": "^6",
+    "babel-eslint": "7",
+    "babel-jest": "20",
+    "babel-loader": "7",
+    "babel-preset-react-app": "^3",
+    "babel-runtime": "6.26.0",
+    "babel-plugin-styled-components": "1.*.*",
+    "coveralls": "3.*.*",
+    "enzyme": "3.*.*",
+    "enzyme-adapter-react-16": "1.*.*",
+    "eslint": "5.*.*",
+    "eslint-config-react-app": "3.*.*",
+    "eslint-plugin-flowtype": "2.*.*",
+    "eslint-plugin-import": "2.*.*",
+    "eslint-plugin-jsx-a11y": "6.*.*",
+    "eslint-plugin-react": "7.*.*",
+    "jest": "23.*.*",
+    "jest-styled-components": "6.*.*",
+    "jsdoc": "3.*.*",
+    "minami": "1.*.*",
+    "parcel-bundler": "1.*.*"
+  },
+  "boilerplate": {
+    "type": "React Component",
+    "renameOptions": {
+      "replaceInFiles": [
+        {
+          "stubName": "YourComponent",
+          "to": ":targetNameComponent",
+          "files": [
+            "src/components/YourComponent/index.jsx",
+            "src/components/YourComponent/YourComponent.test.jsx",
+            "src/index.js",
+            "stories/index.js",
+            "example/index.js",
+            "example/index.html"
+          ]
+        }
+      ],
+      "filesToBeRenamed": {
+        "gitignore": ".gitignore",
+        "src/components/YourComponent": "src/components/:targetNameComponent",
+        "src/components/:targetNameComponent/YourComponent.test.jsx": "src/components/:targetNameComponent/:targetNameComponent.test.jsx"
+      }
+    }
+  }
+}

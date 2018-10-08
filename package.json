@@ -1,0 +1,63 @@
+{
+  "name": "@docomodigital/pdor",
+  "version": "3.0.0",
+  "description": "A boilerplate to create a simple Javascript library",
+  "keywords": [
+    "boilerplate",
+    "javascript",
+    "js",
+    "vanillajs",
+    "react-components"
+  ],
+  "scripts": {
+    "lint": "eslint \"src/**\""
+  },
+  "main": "src/install.js",
+  "engines": {
+    "node": ">= 8"
+  },
+  "bin": {
+    "pdor": "./src/install.js"
+  },
+  "contributors": [
+    {
+      "name": "Aurelio Merenda",
+      "email": "aurelio.merenda@docomogital.com"
+    },
+    {
+      "name": "Davide Gheri",
+      "email": "davide.gheri@docomogital.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docomodigital/pdor.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/docomodigital/pdor/issues"
+  },
+  "homepage": "https://github.com/docomodigital/pdor#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "child-process-promise": "^2.2.1",
+    "commander": "^2.18.0",
+    "figlet": "^1.2.0",
+    "fs-extra": "^7.0.0",
+    "git-url-parse": "^10.0.1",
+    "inquirer": "^6.2.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.isarray": "^4.0.0",
+    "lodash.upperfirst": "^4.3.1",
+    "node-fetch": "^2.2.0",
+    "ora": "^3.0.0",
+    "replace-in-files": "^1.1.2",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}

@@ -1,0 +1,32 @@
+language: node_js
+
+node_js:
+  - "8"
+
+branches:
+ only:
+   - master
+   - /^greenkeeper/.*$/
+
+install:
+  - npm install
+
+before_script:
+  - ./src/install.js travis-vanilla-app -t vanilla --no-interaction
+  - ./src/install.js travis-react-component-app -t react-component --no-interaction
+
+script:
+  - cd travis-vanilla-app
+  - npm run doc
+  - npm run lint
+  - npm run build
+  - npm run test
+  - cd ../travis-react-component-app
+  - npm run doc
+  - npm run lint
+  - npm run build
+  - npm run test
+
+after_script:
+  - rm -rf travis-vanilla-app
+  - rm -rf travis-react-component-app

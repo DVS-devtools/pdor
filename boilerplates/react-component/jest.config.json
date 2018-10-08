@@ -1,0 +1,18 @@
+{
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+        "src/**/*.{js,jsx}"
+    ],
+    "coverageReporters": ["lcov", "text", "text-summary"],
+    "testMatch": [
+        "<rootDir>/src/**/__tests__/**/*.{js,jsx}",
+        "<rootDir>/src/**/?(*.)(spec|test).{js,jsx}"
+    ],
+    "testEnvironment": "jsdom",
+    "transform": {
+        "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+        "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ]
+}
