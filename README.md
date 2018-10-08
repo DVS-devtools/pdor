@@ -1,8 +1,6 @@
 # pdor
 
-[![Build Status](https://travis-ci.com/docomodigital/js-library-boilerplate.svg?branch=master)](https://travis-ci.com/docomodigital/js-library-boilerplate)
-[![npm version](https://badge.fury.io/js/%40docomodigital%2Fjs-library-boilerplate.svg)](https://badge.fury.io/js/%40docomodigital%2Fjs-library-boilerplate)
-[![Greenkeeper badge](https://badges.greenkeeper.io/docomodigital/js-library-boilerplate.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/docomodigital/pdor.svg?branch=master)](https://travis-ci.com/docomodigital/pdor)
 
 **pdor** is a boilerplate to create a simple Javascript library from a given boilerplate
 
