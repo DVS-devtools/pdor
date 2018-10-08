@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const { program } = require('../program');
 const config = require('../config');
-const { defaultBoilerplates } = require('../defaults/boilerplateTypes');
+const { defaultBoilerplates, boilerplateresolver } = require('../defaults/boilerplateTypes');
 const { InstallError } = require('../errors');
 
 /**
@@ -33,7 +33,7 @@ module.exports = function selectBoilerplate() {
                     }))
                 }
             ]).then(({ boilerplateType }) => {
-                if (boilerplateType === 'remote') {
+                if (boilerplateType === 'custom') {
                     return inquirer.prompt([
                         {
                             name: 'boilerplateType',
@@ -45,8 +45,7 @@ module.exports = function selectBoilerplate() {
                 return Promise.resolve({ boilerplateType });
             }).then(({ boilerplateType }) => type = boilerplateType);
         } else {
-            // --type is defined, use it
-            returnPromise = new Promise(res => res(type));
+            returnPromise = Promise.resolve(boilerplateresolver(type));
         }
         return returnPromise
             .then(promptedType => config.resolveConfig(promptedType))

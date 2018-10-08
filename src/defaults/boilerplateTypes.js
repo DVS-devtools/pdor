@@ -1,25 +1,23 @@
-const path = require('path');
-const fs = require('fs-extra');
-const log = require('../logger');
 
-const defaultBoilerplatesBasePath = path.join(__dirname, '../../boilerplates');
+const boilerplates = {
+    vanilla: {
+        name: 'Vanilla js',
+        url: 'https://github.com/docomodigital/pdor-vanillajs-library'
+    },
+    'react-component': {
+        name: 'React component',
+        url: 'https://github.com/docomodigital/pdor-react-component'
+    }
+};
 
 function getBoilerplates() {
-    const defaults = fs.readdirSync(defaultBoilerplatesBasePath).reduce((obj, folder) => {
-        try {
-            const conf = JSON.parse(fs.readFileSync(path.join(defaultBoilerplatesBasePath, folder, 'boilerplate-config.json'), { encoding: 'utf8' }));
-            obj[folder] = conf.boilerplate ? conf.boilerplate.type || folder : folder;
-        } catch (e) {
-            log.debug(`${folder} is not a valid boilerplate, skipping...`);
-        }
+    return Object.keys(boilerplates).reduce((obj, name) => {
+        obj[boilerplates[name].url] = boilerplates[name].name;
         return obj;
-    }, {});
-    defaults.remote = 'Remote (a Github repo)';
-
-    return defaults;
+    }, { custom: 'Custom (a github repo)' });
 }
 
 module.exports = {
-    defaultBoilerplatesBasePath,
+    boilerplateresolver: type => boilerplates[type] ? boilerplates[type].url : type,
     defaultBoilerplates: getBoilerplates()
 };
