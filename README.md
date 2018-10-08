@@ -1,6 +1,6 @@
 # pdor
 
-[![Build Status](https://travis-ci.com/docomodigital/pdor.svg?branch=master)](https://travis-ci.com/docomodigital/pdor)
+[![Build Status](https://travis-ci.com/docomodigital/pdor.svg?branch=master)](https://travis-ci.com/docomodigital/pdor) [![Greenkeeper badge](https://badges.greenkeeper.io/docomodigital/pdor.svg)](https://greenkeeper.io/)
 
 **pdor** is a boilerplate to create a simple Javascript library from a given boilerplate
 
