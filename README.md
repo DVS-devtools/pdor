@@ -55,14 +55,11 @@ It should contain a **boilerplate** field with all the boilerplate specific conf
         
 Example of **boilerplate** config:
 ```json
-{ // package.json or boilerplate-config.json 
-...
 "boilerplate": {
   "type": "Boilerplate name",
   "renameOptions": {
-  ...
   }
-...
+}
 ```
 **_renameOptions.filesToBeRenamed example_**
 
