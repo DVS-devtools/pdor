@@ -96,7 +96,7 @@ function renameFiles(project) {
  */
 function removeConfigFiles({ path }) {
     log.debug('Removing unnecessary config files...');
-    const configFilePath = fspath.join(path, 'boilerplate-config.json');
+    const configFilePath = fspath.join(path, 'pdor.config.json');
     const gitFolderPath = fspath.join(path, '.git');
     return Promise.all([
         fs.remove(configFilePath),
@@ -112,12 +112,18 @@ function removeConfigFiles({ path }) {
  * @returns {Promise<void>}
  */
 function generateFiles({ path, packageJson, name }) {
-    log.debug('WriteJson package.json');
+    let packagePromise;
     const spinner = ora(chalk.cyan('Generating package.json and README.md files...'));
-    return fs.writeJson(fspath.join(path, 'package.json'), packageJson, {
-        spaces: 2,
-        EOL: os.EOL
-    }).then(() => {
+    if (packageJson) {
+        log.debug('WriteJson package.json');
+        packagePromise = fs.writeJson(fspath.join(path, 'package.json'), packageJson, {
+            spaces: 2,
+            EOL: os.EOL
+        });
+    } else {
+        packagePromise = Promise.resolve();
+    }
+    packagePromise.then(() => {
         log.debug('WriteFile empty README.md');
         return fs.writeFile(fspath.join(path, 'README.md'), `## ${name}`);
     }).then(() => spinner.succeed(chalk.green('Files generated with success')))

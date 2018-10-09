@@ -17,6 +17,9 @@ module.exports = function namePackageJson(project) {
     return new Promise((resolve, reject) => {
         try {
             const { name, packageJson } = project;
+            if (!packageJson) {
+                resolve(project);
+            }
             log.debug(`Setting the package.json name as the project name: ${name}`);
             packageJson.name = name;
             const { scripts } = packageJson;

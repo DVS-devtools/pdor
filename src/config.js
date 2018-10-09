@@ -7,24 +7,21 @@ const gitUrlParse = require('git-url-parse');
 const { InstallError } = require('./errors');
 const log = require('./logger');
 const defaultPackageJson = require('./defaults/package');
-const { defaultBoilerplates, defaultBoilerplatesBasePath } = require('./defaults/boilerplateTypes');
 const { removeExtraSlashes, formatDependencies } = require('./utils');
 
 /**
  * Try to get the local config file
  * @param path
- * @param absoulte
  * @returns {*}
  */
-function getConfigFile(path, absoulte = false) {
+function getConfigFile(path) {
     try {
-        let configPath = !absoulte ? fspath.join(path, 'boilerplate-config.json') : path;
-        if (fs.existsSync(configPath)) {
-            return require(configPath);
-        }
-        configPath = fspath.join(path, 'config.json');
-        if (fs.existsSync(configPath)) {
-            return require(configPath);
+        const packageJson = fspath.basename(path) === 'package.json';
+        if (fs.existsSync(path)) {
+            return {
+                packageJson,
+                configFile: require(path),
+            };
         }
         throw new Error('Config boilerplate not found');
     } catch (error) {
@@ -38,7 +35,7 @@ function getConfigFile(path, absoulte = false) {
  * @param file
  * @returns {*}
  */
-function getRawContentUrl(repoUrl, file = 'package.json') {
+function getRawContentUrl(repoUrl, file = 'pdor.config.json') {
     const githubRawBaseUrl = 'https://raw.githubusercontent.com';
     try {
         const parsed = gitUrlParse(repoUrl);
@@ -47,9 +44,6 @@ function getRawContentUrl(repoUrl, file = 'package.json') {
 
         return removeExtraSlashes(`${githubRawBaseUrl}/${path}/${branch}/${file}`);
     } catch (error) {
-        if (error instanceof InstallError) {
-            throw error;
-        }
         throw new InstallError({ error, code: 1, message: chalk.red('Cannot get boilerplate config') });
     }
 }
@@ -113,6 +107,10 @@ module.exports = {
      */
     repoUrl: null,
     /**
+     * @boolean true if the config file is the package.json
+     */
+    isPackageJson: false,
+    /**
      * Given type is a local reference (absolute path or prebuilt boilerplate name)
      * Try to get the config
      * @param type
@@ -120,23 +118,12 @@ module.exports = {
      */
     resolveLocalConfig(type) {
         return new Promise((resolve, reject) => {
-            let config;
             try {
-                if (!fspath.isAbsolute(type)) {
-                    if (!Object.keys(defaultBoilerplates).includes(type)) {
-                        log.debug(`${type} is not a valid boilerplate, available boilerplates:`);
-                        log.debug(Object.keys(defaultBoilerplates).join('\n'));
-                        throw new InstallError({ code: 1, message: chalk.red('Selected boilerplate not valid') });
-                    }
-                    this.type = defaultBoilerplates[type];
-                    this.boilerplatePath = fspath.join(defaultBoilerplatesBasePath, type);
-                    config = getConfigFile(this.boilerplatePath);
-                } else {
-                    this.boilerplatePath = fspath.resolve(fspath.dirname(type));
-                    this.type = type.split('/').reverse()[1]; // eslint-disable-line prefer-destructuring
-                    config = getConfigFile(type, true);
-                }
-                return resolve(config);
+                this.boilerplatePath = fspath.resolve(fspath.dirname(type));
+                this.type = type.split('/').reverse()[1]; // eslint-disable-line prefer-destructuring
+                const { configFile, packageJson } = getConfigFile(type);
+                this.isPackageJson = packageJson;
+                return resolve(configFile);
             } catch (error) {
                 return reject(error);
             }
@@ -159,13 +146,14 @@ module.exports = {
             .then((response) => {
                 if (!response.ok) {
                     log.debug('package.json not found');
-                    repoUrl = getRawContentUrl(type, 'boilerplate-config.json');
+                    repoUrl = getRawContentUrl(type, 'package.json');
                     log.debug(`Try to fetch config from ${repoUrl}`);
                     return fetch(repoUrl)
                         .then((res) => {
                             if (!res.ok) {
                                 throw new InstallError({ code: 1, message: chalk.red('Remote repository not found') });
                             }
+                            this.isPackageJson = true;
                             return Promise.resolve(res);
                         });
                 }
@@ -190,13 +178,19 @@ module.exports = {
 
         return getConfig
             .then((config) => {
-                this.packageJson = Object.assign(this.packageJson, config);
-                delete this.packageJson.boilerplate;
+                if (this.isPackageJson) {
+                    this.packageJson = Object.assign(this.packageJson, config);
+                    delete this.packageJson.pdor;
+                }
                 this.dependencies = formatDependencies(config.dependencies || []);
                 this.devDependencies = formatDependencies(config.devDependencies || []);
-                if (config.boilerplate) {
-                    this.type = config.boilerplate.type || this.type;
-                    this.renameOptions = config.boilerplate.renameOptions || null;
+                const boilerplate = this.isPackageJson ? config.pdor : config;
+                if (boilerplate) {
+                    this.type = boilerplate.type || this.type;
+                    this.renameOptions = boilerplate.renameOptions || null;
+                    if (!boilerplate.generatePackageJson && !this.isPackageJson) {
+                        delete this.packageJson;
+                    }
                 }
                 return this;
             });

@@ -37,14 +37,8 @@ cd my-app
 
 ### Create a custom boilerplate
 
-A bare minimum boilerplate is a Github repository with a json configuration file with one of the following names:
-* **package.json**
-* **boilerplate-config.json**
+A bare minimum boilerplate is a Github repository with a **pdor.config.json** configuration file with the following fields:
 
-The config file should be structured like a [npm package.json](https://docs.npmjs.com/files/package.json)
-
-It should contain a **boilerplate** field with all the boilerplate specific config.
-##### Available config:
 * **type**: the boilerplate name
 * **renameOptions**: an object with the files/strings renaming instructions.
     * **filesToBeRenamed**:  an object with the file to be renamed as key and the destination file as value, supports the [**:targetName**](#:targetName) placeholder, they are processed one after the other, so if a files to be renamed is inside a directory to be renamed, you should specify as source the result of the directory renaming (see the example below)
@@ -53,14 +47,22 @@ It should contain a **boilerplate** field with all the boilerplate specific conf
         * **to**: the desired replacement (supports the [**:targetName**](#:targetName) placeholder)
         * **files**: array of files to scan
         
-Example of **boilerplate** config:
+You can also put your pdor config inside a **package.json** in the **pdor** field:
+
 ```json
-"boilerplate": {
-  "type": "Boilerplate name",
-  "renameOptions": {
-  }
+{
+    "name": "custom-boilerplate",
+    "version": "1.0.0",
+    "dependencies": {},
+    "pdor": {
+        "type": "Custom Boilerplate",
+        "renameOptions": {
+        }
+    }
 }
 ```
+
+
 **_renameOptions.filesToBeRenamed example_**
 
 In this exemple we have to rename an entire folder and a file inside that folder:
