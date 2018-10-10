@@ -16,7 +16,6 @@ With **npx** (with npm 5.2+ and higher):
 
 ```bash
 npx @docomodigital/pdor my-app 
-cd my-app
 ```
 
 for older versions of npm, install the package as global first:
@@ -24,17 +23,17 @@ for older versions of npm, install the package as global first:
 ```bash
 npm i -g @docomodigital/pdor
 pdor my-app
-cd my-app
 ```
 ### Available Options
 * `--yarn`: use Yarn Package manager to install required dependencies instead of npm 
-* `--type`: specify the boilerplate to use (`vanilla` or `react-component` )
+* `--type`: specify the boilerplate to use (`vanilla`, `react-component` or a `github repo url`)
 * `--verbose`: print more info during the generation process
 * `--no-interaction`: if an user input is required, stop the process. Useful for CI tools
 * `--skip-install`: skip the dependency installation step
 
+## Commands
 For a list of available features of the generated boilerplate, please refer to the used boilerplate configuration.
 * [Vanilla js](https://github.com/docomodigital/pdor-vanillajs-library/blob/master/CONTRIBUTING.md)  
 * [React Component](https://github.com/docomodigital/pdor-react-component/blob/master/CONTRIBUTING.md)  
-
+---
 Interested in creating a custom boilerplates? [Read how](https://github.com/docomodigital/pdor/blob/master/BOILERPLATE.md) 
