@@ -4,7 +4,7 @@
 
 **pdor** is a tool to generate a library from a given boilerplate.
 
-### Available boilerplates
+## Available boilerplates
 
 * [**Vanilla JS**](https://github.com/docomodigital/pdor-vanillajs-library): generate a Vanilla js project
 * [**React Component**](https://github.com/docomodigital/pdor-react-component): generate a React component 
@@ -35,7 +35,7 @@ cd my-app
 
 ---
 
-### Create a custom boilerplate
+## Create a custom boilerplate
 
 A bare minimum boilerplate is a Github repository with a **pdor.config.json** configuration file with the following fields:
 
