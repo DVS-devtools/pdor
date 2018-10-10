@@ -146,7 +146,8 @@ function copyPromise({
     boilerplatePath,
     path,
     isRemote,
-    repoUrl
+    repoUrl,
+    branch
 }, verbose = false) {
     let promise;
     if (!isRemote) {
@@ -155,10 +156,7 @@ function copyPromise({
     } else {
         log.debug('Copy boilerplate from a Git repo');
         if (canUseGit()) {
-            const repoUrlArray = repoUrl.split('#');
-            const repoUrlWithoutBranch = repoUrlArray[0];
-            const branch = repoUrlArray.length > 1 ? repoUrlArray[1] : 'master';
-            const cloneCommand = `git clone ${repoUrlWithoutBranch} ${path}`;
+            const cloneCommand = `git clone ${repoUrl} ${path}`;
             promise = new Promise((resolve, reject) => {
                 try {
                     execSync(cloneCommand, { stdio: verbose ? [0, 1, 2] : 'ignore' });

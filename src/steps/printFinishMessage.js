@@ -1,6 +1,25 @@
+const fs = require('fs-extra');
+const fspath = require('path');
 const figlet = require('figlet');
 const chalk = require('chalk');
+// const marked = require('marked');
+// const TerminalRenderer = require('marked-terminal');
 const log = require('../logger');
+const { removeExtraSlashes } = require('../utils');
+
+// marked.setOptions({
+//     renderer: new TerminalRenderer()
+// });
+
+function logCommands({ path, repoUrl, branch }) {
+    const contributing = fspath.join(path, 'CONTRIBUTING.md');
+    if (fs.existsSync(contributing) && repoUrl) {
+        // log.log(marked(fs.readFileSync(contributing, { encoding: 'utf8' })));
+        const contributingUrl = removeExtraSlashes(`${repoUrl.replace('.git', '')}/blob/${branch}/CONTRIBUTING.md`);
+        log.log('For a list of available commands, please see:');
+        log.log(`${chalk.cyan(contributingUrl)}`);
+    }
+}
 
 /**
  * @module steps/printFinishMessage
@@ -18,6 +37,7 @@ What now?
         
 ${chalk.cyan(`$ cd ${path} and start coding!`)}
 `);
+        logCommands(project);
         log.debug('All done, exiting with code 0');
         process.exit(0);
     });
