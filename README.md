@@ -33,4 +33,4 @@ cd my-app
 * `--no-interaction`: if an user input is required, stop the process. Useful for CI tools
 * `--skip-install`: skip the dependency installation step
 
-Interested in creating a custom boilerplates? [Read how]() 
+Interested in creating a custom boilerplates? [Read how](https://github.com/docomodigital/pdor/blob/master/BOILERPLATE.md) 
