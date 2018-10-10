@@ -62,6 +62,8 @@ The **:targetName** placeholder is used to replace :targetName with the upper ca
  
 The rest of the boilerplate can be structured in any way, it will be copied in the destination folder. 
  
+Create a CONTRIBUTING.md file at the root of the boilerplate and add there all available commands instructions to show them at the generation.
+ 
 You can also keep your boilerplate locally and use them specifying the absolute path to the config json file:
 ```bash
 npx @docomodigital/pdor my-app -t /path/to/config/file.json
