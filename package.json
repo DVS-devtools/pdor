@@ -10,7 +10,8 @@
     "react-components"
   ],
   "scripts": {
-    "lint": "eslint \"src/**\""
+    "lint": "eslint \"src/**\"",
+    "postversion": "git push --follow-tags"
   },
   "main": "src/install.js",
   "engines": {
