@@ -33,4 +33,8 @@ cd my-app
 * `--no-interaction`: if an user input is required, stop the process. Useful for CI tools
 * `--skip-install`: skip the dependency installation step
 
+For a list of available features of the generated boilerplate, please refer to the used boilerplate configuration.
+* [Vanilla js](https://github.com/docomodigital/pdor-vanillajs-library/blob/master/CONTRIBUTING.md)  
+* [React Component](https://github.com/docomodigital/pdor-react-component/blob/master/CONTRIBUTING.md)  
+
 Interested in creating a custom boilerplates? [Read how](https://github.com/docomodigital/pdor/blob/master/BOILERPLATE.md) 
