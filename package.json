@@ -41,7 +41,7 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "child-process-promise": "^2.2.1",
-    "commander": "^2.18.0",
+    "commander": "^2.19.0",
     "figlet": "^1.2.0",
     "fs-extra": "^7.0.0",
     "git-url-parse": "^10.0.1",
