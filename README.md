@@ -37,5 +37,6 @@ For a list of available features of the generated boilerplate, please refer to t
 * [Vanilla js](https://github.com/docomodigital/pdor-vanillajs-library/blob/master/CONTRIBUTING.md)  
 * [React Component](https://github.com/docomodigital/pdor-react-component/blob/master/CONTRIBUTING.md)
 * [Typescript library](https://github.com/docomodigital/pdor-typescript-library/blob/master/CONTRIBUTING.md)  
+
 ---
 Interested in creating a custom boilerplate? [Read how](https://github.com/docomodigital/pdor/blob/master/BOILERPLATE.md) 
