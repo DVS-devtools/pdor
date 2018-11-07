@@ -7,7 +7,8 @@
 ## Available boilerplates
 
 * [**Vanilla JS**](https://github.com/docomodigital/pdor-vanillajs-library): generate a Vanilla js project
-* [**React Component**](https://github.com/docomodigital/pdor-react-component): generate a React component 
+* [**React Component**](https://github.com/docomodigital/pdor-react-component): generate a React component
+* [**Typescript library**](https://github.com/docomodigital/pdor-typescript-library): generate a Vanilla Ts project 
 * **Remote**: pass a github repo url to use your own boilerplate
 
 ## Usage
@@ -26,7 +27,7 @@ pdor my-app
 ```
 ### Available Options
 * `--yarn`: use Yarn Package manager to install required dependencies instead of npm 
-* `--type`: specify the boilerplate to use (`vanilla`, `react-component` or a `github repo url`)
+* `--type`: specify the boilerplate to use (`vanilla`, `react-component`, `typescript` or a `github repo url`)
 * `--verbose`: print more info during the generation process
 * `--no-interaction`: if an user input is required, stop the process. Useful for CI tools
 * `--skip-install`: skip the dependency installation step
@@ -34,6 +35,7 @@ pdor my-app
 ## Commands
 For a list of available features of the generated boilerplate, please refer to the used boilerplate configuration.
 * [Vanilla js](https://github.com/docomodigital/pdor-vanillajs-library/blob/master/CONTRIBUTING.md)  
-* [React Component](https://github.com/docomodigital/pdor-react-component/blob/master/CONTRIBUTING.md)  
+* [React Component](https://github.com/docomodigital/pdor-react-component/blob/master/CONTRIBUTING.md)
+* [Typescript library](https://github.com/docomodigital/pdor-typescript-library/blob/master/CONTRIBUTING.md)  
 ---
 Interested in creating a custom boilerplates? [Read how](https://github.com/docomodigital/pdor/blob/master/BOILERPLATE.md) 
