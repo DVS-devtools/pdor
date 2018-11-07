@@ -7,6 +7,10 @@ const boilerplates = {
     'react-component': {
         name: 'React component',
         url: 'https://github.com/docomodigital/pdor-react-component'
+    },
+    typescript: {
+        name: 'Typescript library',
+        url: 'https://github.com/docomodigital/pdor-typescript-library'
     }
 };
 
