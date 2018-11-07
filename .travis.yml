@@ -14,6 +14,7 @@ install:
 before_script:
   - ./src/install.js travis-vanilla-app -t vanilla --no-interaction
   - ./src/install.js travis-react-component-app -t react-component --no-interaction
+  - ./src/install.js travis-typescript-app -t typescript --no-interaction
 
 script:
   - cd travis-vanilla-app
@@ -26,7 +27,13 @@ script:
   - npm run lint
   - npm run build
   - npm run test
+  - cd ../travis-typescript-app
+  - npm run doc
+  - npm run lint
+  - npm run build
+  - npm run test
 
 after_script:
   - rm -rf travis-vanilla-app
   - rm -rf travis-react-component-app
+  - rm -rf travis-typescript-app
