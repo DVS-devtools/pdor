@@ -107,7 +107,7 @@ module.exports = function installDependencies(project) {
     const { path, dependencies, devDependencies } = project;
     process.chdir(path);
     const yarn = canUseYarn(program.yarn);
-    if (program.skipInstall) {
+    if (program.skipInstall || project.config.pdor.skipInstall) {
         return new Promise(resolve => resolve(project));
     }
     const spinner = ora(chalk.cyan('Installing dependencies, this can take a while... ')).start();

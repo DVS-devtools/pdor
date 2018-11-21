@@ -68,3 +68,25 @@ You can also keep your boilerplate locally and use them specifying the absolute 
 ```bash
 npx @docomodigital/pdor my-app -t /path/to/config/file.json
 ```
+
+### Package.json
+
+If you need to include a **package.json** file you can instead add a custom field **pdor** with the pdor config listed above.
+If your package.json scripts should include the project name (es umd names..) you can add a placeholder to the script and Pdor will automatically replace it, example:
+```json
+{
+  "scripts": {
+    "build": "webpack --name :libName"
+  }
+}
+```
+**:libName** will be replaced with the UpperCamelCased project name *(es: browser-storage => BrowserStorage)*
+
+```json
+{
+  "scripts": {
+    "docs": "jsdoc -d ../docs/:libNameKebab"
+  }
+}
+```
+**:libNameKebab** will be replaced with the kebab-cased project name

@@ -1,6 +1,6 @@
 const chalk = require('chalk');
-const camelCase = require('lodash.camelcase');
-const upperFirst = require('lodash.upperfirst');
+const kebabcase = require('lodash.kebabcase');
+const { upperCamelcase, replaceInObject } = require('../utils');
 const { InstallError } = require('../errors');
 const log = require('../logger');
 
@@ -22,17 +22,11 @@ module.exports = function namePackageJson(project) {
             }
             log.debug(`Setting the package.json name as the project name: ${name}`);
             packageJson.name = name;
-            const { scripts } = packageJson;
-            log.debug(`Replacing package.json stub placeholders with upper camel case project name: ${upperFirst(camelCase(name))}`);
-            packageJson.scripts = Object.keys(scripts).reduce((obj, k) => {
-                if (scripts[k].indexOf(':libName') > -1) {
-                    log.debug(`Placeholder found on script ${k}, replacing...`);
-                    obj[k] = scripts[k].replace(':libName', upperFirst(camelCase(name)));
-                } else {
-                    obj[k] = scripts[k];
-                }
-                return obj;
-            }, {});
+
+            log.debug(`Replacing package.json stub placeholders with upper kebab case project name: ${kebabcase(name)}`);
+            packageJson.scripts = replaceInObject(packageJson.scripts, ':libNameKebab', kebabcase(name));
+            log.debug(`Replacing package.json stub placeholders with upper camel case project name: ${upperCamelcase(name)}`);
+            packageJson.scripts = replaceInObject(packageJson.scripts, ':libName', upperCamelcase(name));
 
             return resolve(Object.assign(project, { name, packageJson }));
         } catch (error) {
