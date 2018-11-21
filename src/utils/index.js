@@ -81,6 +81,25 @@ function canUseGit() {
     }
 }
 
+/**
+ * Replace given path with given to in given Object values
+ * @param original
+ * @param path
+ * @param to
+ * @return {Object}
+ */
+function replaceInObject(original, path, to) {
+    return Object.keys(original).reduce((obj, k) => {
+        if (original[k].indexOf(path) > -1) {
+            log.debug(`Placeholder found on script ${k}, replacing...`);
+            obj[k] = original[k].replace(new RegExp(path, 'g'), to);
+        } else {
+            obj[k] = original[k];
+        }
+        return obj;
+    }, {});
+}
+
 module.exports = {
     upperCamelcase,
     removeExtraSlashes,
@@ -88,4 +107,5 @@ module.exports = {
     isEmptyDir,
     canUseYarn,
     canUseGit,
+    replaceInObject,
 };

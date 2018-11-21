@@ -107,6 +107,10 @@ module.exports = {
      */
     repoUrl: null,
     /**
+     * @string if the boilerplate is remote, we need the branch to clone
+     */
+    branch: null,
+    /**
      * @boolean true if the config file is the package.json
      */
     isPackageJson: false,
@@ -123,6 +127,7 @@ module.exports = {
                 this.type = type.split('/').reverse()[1]; // eslint-disable-line prefer-destructuring
                 const { configFile, packageJson } = getConfigFile(type);
                 this.isPackageJson = packageJson;
+                this.config = configFile;
                 return resolve(configFile);
             } catch (error) {
                 return reject(error);
@@ -161,8 +166,10 @@ module.exports = {
             })
             .then(re => re.json())
             .then((conf) => {
+                const repoUrlArray = type.split('#');
                 this.type = 'remote';
-                this.repoUrl = type;
+                this.repoUrl = repoUrlArray[0]; // eslint-disable-line prefer-destructuring
+                this.branch = repoUrlArray.length > 1 ? repoUrlArray[1] : 'master';
                 this.config = conf;
 
                 return conf;

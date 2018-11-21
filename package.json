@@ -1,6 +1,6 @@
 {
   "name": "@docomodigital/pdor",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "A boilerplate to create a simple Javascript library",
   "keywords": [
     "boilerplate",
@@ -10,7 +10,8 @@
     "react-components"
   ],
   "scripts": {
-    "lint": "eslint \"src/**\""
+    "lint": "eslint \"src/**\"",
+    "postversion": "git push --follow-tags"
   },
   "main": "src/install.js",
   "engines": {
@@ -41,13 +42,14 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "child-process-promise": "^2.2.1",
-    "commander": "^2.18.0",
+    "commander": "^2.19.0",
     "figlet": "^1.2.1",
     "fs-extra": "^7.0.0",
-    "git-url-parse": "^10.0.1",
+    "git-url-parse": "^11.0.0",
     "inquirer": "^6.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.isarray": "^4.0.0",
+    "lodash.kebabcase": "^4.1.1",
     "lodash.upperfirst": "^4.3.1",
     "node-fetch": "^2.2.0",
     "ora": "^3.0.0",
