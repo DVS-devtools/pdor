@@ -127,6 +127,7 @@ module.exports = {
                 this.type = type.split('/').reverse()[1]; // eslint-disable-line prefer-destructuring
                 const { configFile, packageJson } = getConfigFile(type);
                 this.isPackageJson = packageJson;
+                this.config = configFile;
                 return resolve(configFile);
             } catch (error) {
                 return reject(error);
