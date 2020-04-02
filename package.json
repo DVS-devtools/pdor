@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/docomodigital/pdor#readme",
   "dependencies": {
-    "chalk": "^2.4.1",
+    "chalk": "^4.0.0",
     "child-process-promise": "^2.2.1",
     "commander": "^2.19.0",
     "figlet": "^1.2.1",
